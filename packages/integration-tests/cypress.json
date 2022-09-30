@@ -9,7 +9,7 @@
   "videosFolder": "../../dist/cypress/packages/integration-tests/videos",
   "screenshotsFolder": "../../dist/cypress/packages/integration-tests/screenshots",
   "chromeWebSecurity": false,
-  "baseUrl": "http://assisted-installer-ui.edge-qe.apps.ocp-c1.prod.psi.redhat.com/clusters",
+  "baseUrl": "http://localhost:3000",
   "viewportWidth": 1440,
   "viewportHeight": 1080,
   "execTimeout": 12000,
