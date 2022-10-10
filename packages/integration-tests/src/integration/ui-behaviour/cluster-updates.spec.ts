@@ -22,6 +22,7 @@ describe('Assisted Installer UI behaviour - cluster updates', () => {
 
   describe('CI Integration - WIP', () => {
     it('Should do something', () => {
+      cy.visit('/status'); // Fake page with only static content
       commonActions.openNewClusterPage();
     });
 
