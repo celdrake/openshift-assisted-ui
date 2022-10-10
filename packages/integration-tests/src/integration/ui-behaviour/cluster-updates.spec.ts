@@ -20,7 +20,11 @@ describe('Assisted Installer UI behaviour - cluster updates', () => {
     Cypress.env('AI_FORBIDDEN_CLUSTER_PATCH', false);
   });
 
-  describe('Prevent invalid PATCH requests', () => {
+  describe('CI Integration - WIP', () => {
+    it('Should do something', () => {
+      commonActions.openNewClusterPage();
+    });
+
     it('Should not update a cluster when no changes were done by the user', () => {
       Cypress.env('AI_FORBIDDEN_CLUSTER_PATCH', true);
 
