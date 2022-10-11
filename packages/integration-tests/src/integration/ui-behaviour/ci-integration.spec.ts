@@ -13,14 +13,14 @@ describe('Assisted Installer UI behaviour - cluster updates', () => {
 
   beforeEach(() => {
     cy.loadAiAPIIntercepts(null);
-    commonActions.visitClusterDetailsPage();
   });
 
-  afterEach(() => {
-    Cypress.env('AI_FORBIDDEN_CLUSTER_PATCH', false);
-  });
+  describe('CI Integration - WIP', () => {
+    it('Should do something', () => {
+      cy.visit('/status'); // Fake page with only static content
+      commonActions.visitNewClusterPage();
+    });
 
-  describe('Prevent invalid PATCH requests', () => {
     it('Should not update a cluster when no changes were done by the user', () => {
       Cypress.env('AI_FORBIDDEN_CLUSTER_PATCH', true);
 
