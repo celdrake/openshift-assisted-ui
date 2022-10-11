@@ -37,8 +37,6 @@ describe(`Assisted Installer Disk Encryption`, () => {
     });
 
     afterEach(() => {
-      commonActions.waitForSave();
-      commonActions.waitForNext();
       diskEncryptionSection.getMastersEncryptionSwitch().click({ force: true });
     });
 

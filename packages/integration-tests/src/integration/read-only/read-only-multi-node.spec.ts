@@ -1,10 +1,10 @@
-import { navbar } from '../../views/navbar';
 import { clusterDetailsPage } from '../../views/clusterDetails';
 import { bareMetalDiscoveryPage } from '../../views/bareMetalDiscovery';
 import { networkingPage } from '../../views/networkingPage';
 import { reviewAndCreatePage } from '../../views/reviewCreate';
-import { commonActions } from '../../views/common';
 import { transformBasedOnUIVersion } from '../../support/transformations';
+import { commonActions } from '../../views/common';
+import { navbar } from '../../views/navbar';
 
 describe(`Assisted Installer Read Only Cluster`, () => {
   before(() => {
@@ -17,26 +17,27 @@ describe(`Assisted Installer Read Only Cluster`, () => {
 
   beforeEach(() => {
     cy.loadAiAPIIntercepts(null);
-    commonActions.visitClusterDetailsPage();
+    commonActions.visitClusterWizardPage();
   });
 
   describe('Read Only cluster', () => {
     it('Should display the Cluster details page in viewer mode', () => {
-      navbar.clickOnNavItem('Cluster details');
+      navbar.openWizardStep('Cluster details');
 
       clusterDetailsPage.getClusterNameField().should('be.disabled');
       clusterDetailsPage.getBaseDnsDomain().should('be.disabled');
     });
 
     it('Should display Operators page in viewer mode', () => {
-      navbar.clickOnNavItem('Operators');
+      navbar.openWizardStep('Operators');
+
       bareMetalDiscoveryPage.getCnvField().should('be.disabled');
       bareMetalDiscoveryPage.getOdfOperator().should('be.disabled');
       bareMetalDiscoveryPage.getLvmOperator().should('not.exist');
     });
 
     it('Should display the Host discovery page in viewer mode', () => {
-      navbar.clickOnNavItem('Host discovery');
+      navbar.openWizardStep('Host discovery');
 
       // General controls
       bareMetalDiscoveryPage.getIntegrationWithvSphere().should('be.disabled');
@@ -49,13 +50,14 @@ describe(`Assisted Installer Read Only Cluster`, () => {
     });
 
     it('Should display Storage page in viewer mode', () => {
-      navbar.clickOnNavItem('Storage');
+      navbar.openWizardStep('Storage');
+
       bareMetalDiscoveryPage.getHostTableMassActions().should('not.exist');
       bareMetalDiscoveryPage.validateIsReadOnlyHostMenu();
     });
 
     it('Should display the Networking page in viewer mode', () => {
-      navbar.clickOnNavItem('Networking');
+      navbar.openWizardStep('Networking');
 
       networkingPage.getClusterManagedNetworking().should('be.disabled');
       networkingPage.getUserManagedNetworking().should('be.disabled');
@@ -67,7 +69,7 @@ describe(`Assisted Installer Read Only Cluster`, () => {
     });
 
     it('Should display the Review page in viewer mode', () => {
-      navbar.clickOnNavItem('Review and create');
+      navbar.openWizardStep('Review and create');
 
       reviewAndCreatePage.getInstallButton().should('be.disabled');
     });

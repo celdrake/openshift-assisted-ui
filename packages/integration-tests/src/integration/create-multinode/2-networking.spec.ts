@@ -12,7 +12,7 @@ describe(`Assisted Installer Multinode Networking`, () => {
 
   beforeEach(() => {
     cy.loadAiAPIIntercepts(null);
-    commonActions.visitClusterDetailsPage();
+    commonActions.visitClusterWizardPage();
     commonActions.startAtNetworkingStep();
   });
 

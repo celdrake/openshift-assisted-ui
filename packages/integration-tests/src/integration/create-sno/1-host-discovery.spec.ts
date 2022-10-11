@@ -15,7 +15,7 @@ describe(`Assisted Installer SNO Host discovery`, () => {
 
   beforeEach(() => {
     cy.loadAiAPIIntercepts(null);
-    commonActions.visitClusterDetailsPage();
+    commonActions.visitClusterWizardPage();
   });
 
   describe('Downloading the Discovery ISO', () => {

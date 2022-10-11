@@ -6,7 +6,7 @@ import { dualStackNetworkingRequest, ipv4NetworkingRequest } from '../../fixture
 describe(`Assisted Installer Dualstack Networking`, () => {
   beforeEach(() => {
     cy.loadAiAPIIntercepts(null);
-    commonActions.visitClusterDetailsPage();
+    commonActions.visitClusterWizardPage();
     commonActions.startAtNetworkingStep();
   });
 

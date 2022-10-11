@@ -1,6 +1,6 @@
-import { navbar } from '../../views/navbar';
 import { transformBasedOnUIVersion } from '../../support/transformations';
 import { commonActions } from '../../views/common';
+import { navbar } from '../../views/navbar';
 
 describe('Assisted Installer UI behaviour - cluster updates', () => {
   before(() => {
@@ -13,7 +13,6 @@ describe('Assisted Installer UI behaviour - cluster updates', () => {
 
   beforeEach(() => {
     cy.loadAiAPIIntercepts(null);
-    commonActions.visitClusterDetailsPage();
   });
 
   afterEach(() => {
@@ -24,7 +23,9 @@ describe('Assisted Installer UI behaviour - cluster updates', () => {
     it('Should not update a cluster when no changes were done by the user', () => {
       Cypress.env('AI_FORBIDDEN_CLUSTER_PATCH', true);
 
-      navbar.clickOnNavItem('Cluster details');
+      commonActions.visitClusterWizardPage();
+      navbar.openWizardStep('Cluster details');
+
       commonActions.clickNextButton();
       commonActions.clickNextButton();
       commonActions.getHeader('h2').should('contain', 'Host discovery');

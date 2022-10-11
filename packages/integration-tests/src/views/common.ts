@@ -1,44 +1,15 @@
-import { getCwd, getUiVersion } from '../support/utils';
 import * as utils from '../support/utils';
+import { navbar } from './navbar';
 
 export const commonActions = {
   clickButtonContainingText: (text: string) => {
     cy.get(`button:contains('${text}')`).scrollIntoView().should('be.visible').click();
-  },
-  openWizardStep: (stepName: string) => {
-    cy.get('.pf-c-wizard__nav-item').contains(stepName).click();
-  },
-  clickDropDownMenuItem: (menuItemName: string) => {
-    cy.get('.pf-c-dropdown__menu-item').contains(menuItemName).click();
-  },
-  newLogAssistedUIVersion: () => {
-    getUiVersion().then((uiVersion) => {
-      cy.log('assisted-ui-lib-version', uiVersion);
-      getCwd().then((homeDir) => {
-        cy.log(`Writing UI version to ${homeDir}/test_artifacts/versions.log`);
-        cy.writeFile(`${homeDir}/test_artifacts/versions.log`, `UI: ${uiVersion}`, { flag: 'a+' });
-      });
-    });
   },
   waitForSpinnerToDisappear: () => {
     cy.get('.pf-c-spinner__tail-ball').should('not.exist');
   },
   waitForValidationsToInitialize: () => {
     cy.get('.pf-m-info').should('not.exist');
-  },
-  closeCookiesBanner: () => {
-    cy.get('body').then(($body) => {
-      if ($body.find(Cypress.env('trusteConsentButtonId')).length > 0) {
-        cy.get(Cypress.env('trusteConsentButtonId')).click();
-      }
-    });
-  },
-  closePendoBanner: () => {
-    cy.get('body').then(($body) => {
-      if ($body.find(Cypress.env('pendoCloseGuide')).length > 0) {
-        cy.get(Cypress.env('pendoCloseGuide')).click();
-      }
-    });
   },
   getNextButton: () => {
     return cy.get(Cypress.env('nextButton'));
@@ -64,20 +35,17 @@ export const commonActions = {
   },
   startAtNetworkingStep: () => {
     if (utils.hasWizardSignal('READY_TO_INSTALL')) {
-      commonActions.openWizardStep('Networking');
+      navbar.openWizardStep('Networking');
     } else {
       commonActions.getHeader('h2').should('contain', 'Host discovery');
       commonActions.clickNextButton();
       commonActions.clickNextButton();
     }
   },
-  startAtStorageStep: () => {
-    commonActions.openWizardStep('Storage');
-  },
   visitNewClusterPage: () => {
     cy.visit('/clusters/~new');
   },
-  visitClusterDetailsPage: () => {
+  visitClusterWizardPage: () => {
     cy.visit(`/clusters/${Cypress.env('clusterId')}`);
   },
 };

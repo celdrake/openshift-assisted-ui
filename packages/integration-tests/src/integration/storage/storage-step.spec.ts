@@ -2,6 +2,7 @@ import { storagePage } from '../../views/storagePage';
 import { commonActions } from '../../views/common';
 import { hostsTableSection } from '../../views/hostsTableSection';
 import { transformBasedOnUIVersion } from '../../support/transformations';
+import { navbar } from '../../views/navbar';
 
 const masterDisks = [
   {
@@ -41,8 +42,8 @@ describe(`Assisted Installer Storage Step`, () => {
   describe(`Host storage table`, () => {
     beforeEach(() => {
       cy.loadAiAPIIntercepts(null);
-      commonActions.visitClusterDetailsPage();
-      commonActions.startAtStorageStep();
+      commonActions.visitClusterWizardPage();
+      navbar.openWizardStep('Storage');
     });
 
     it('Should display the existing hosts storage details', () => {
